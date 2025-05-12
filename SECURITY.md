@@ -1,3 +1,5 @@
+# Security
+
 Thank you for helping keep this project secure.
 
 🔐 Reporting a Vulnerability
