@@ -20,5 +20,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "nest-cli": "^0.0.5",
+    "zod": "^3.24.4"
+  }
 }
