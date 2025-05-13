@@ -22,8 +22,14 @@
     "packages/*"
   ],
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.6",
+    "cal-sans": "^1.0.1",
     "lodash": "^4.17.21",
     "nest-cli": "^0.0.5",
+    "postcss": "^8.5.3",
+    "react": "^19.1.0",
+    "react-hook-form": "^7.56.3",
+    "tailwindcss": "^4.1.6",
     "zod": "^3.24.4"
   }
 }
