@@ -9,6 +9,7 @@ interface SignupData {
     username: string;
     password: string;
     confirmPassword: string,
+    gender: '',
     dob: {
         day: string;
         month: string;
@@ -28,6 +29,7 @@ const defaultSignupData: SignupData = {
     username: '',
     password: '',
     confirmPassword: '',
+    gender: '',
     dob: {
         day: '',
         month: '',

@@ -32,7 +32,7 @@ const StartForm = () => {
                 <button
                     className='w-full p-2 px-4 rounded border-muted border-1 bg-white hover:bg-gray-100 focus:outline-none flex items-center justify-center gap-2 cursor-pointer'
                 >
-                    <img className='w-4' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ901eAwCHJkZ_K-vjQz9vX-WNgASX8gisXw&s" alt="Google" />
+                    <img className='w-4' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2sSeQqjaUTuZ3gRgkKjidpaipF_l6s72lBw&s" alt="Google" />
                     <p className='relative top-0.5'>Sign up with Google</p>
                 </button>
 
