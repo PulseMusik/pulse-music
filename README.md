@@ -48,6 +48,6 @@ npm install
 Thanks again to these amazing projects which help power Pulse:
 
 - [Next.js](https://nextjs.org/)
-- [Day.js](https://nestjs.com/)
+- [Nest.js](https://nestjs.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [MongoDB](https://mongodb.com/)
