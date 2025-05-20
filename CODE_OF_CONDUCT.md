@@ -1,6 +1,6 @@
-# Code of Conduct
+### Code of Conduct
 
-As the maintainer of this open-source project, I am committed to fostering an open, welcoming, and respectful environment for all contributors and users.
+As the one and only maintainer (my alt account is the other contributor @2fingerbush) of this open-source project, I am committed to fostering an open, welcoming, and respectful environment for all contributors and users.
 
 🚦 <b>Expectations</b>
 
