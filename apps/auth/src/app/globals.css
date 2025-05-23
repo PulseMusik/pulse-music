@@ -1,8 +1,14 @@
 @import "tailwindcss";
-@import 'cal-sans';
+@import "cal-sans";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+@media (min-width: 1024px) {
+  *:focus {
+    outline: none;
+  }
+}
 
 html,
 body {
@@ -84,7 +90,11 @@ h6 {
 }
 
 .border_muted {
-  border-color: hsla(220,14%,94%,1);
+  border-color: hsla(220, 14%, 94%, 1);
+}
+
+.invert_color {
+  filter: invert(1);
 }
 
 :root {

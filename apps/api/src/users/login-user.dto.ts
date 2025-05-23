@@ -17,7 +17,6 @@ export class LoginSanitizeDto {
     email: string;
 
     @IsNotEmpty({ message: 'Password is required' })
-    @Length(8, 128, { message: 'Password must be between 8 and 128 characters' })
     @Transform(({ value }) => {
         if (typeof value !== 'string') return value;
         const clean = sanitizeHtml(value, {

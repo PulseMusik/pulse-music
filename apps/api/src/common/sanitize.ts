@@ -1,4 +1,5 @@
 import { Transform } from 'class-transformer';
+import sanitizeHtml from 'sanitize-html';
 
 export function Trim() {
     return Transform(({ value }) => (typeof value === 'string' ? value.trim() : value));
@@ -14,4 +15,13 @@ export function Escape() {
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
     });
+}
+
+export function SanitizeHTML() {
+    return Transform(({ value }) =>
+        sanitizeHtml(value ?? '', {
+            allowedTags: [],
+            allowedAttributes: {},
+        }),
+    );
 }

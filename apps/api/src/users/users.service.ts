@@ -1,4 +1,4 @@
-import { BadRequestException, HttpCode, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { BadRequestException, HttpCode, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './create-user.dto';
 
 import PulseAccount, { DefaultPulseAccount } from '../models/User';
@@ -9,6 +9,7 @@ import { PROFILE_PICTURE_URL } from 'src/constants';
 import { EncryptionService } from 'src/common/encryption.service';
 import { TokensService } from './tokens/tokens.service';
 import User from '../models/User';
+import { LoginSanitizeDto } from './login-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -17,7 +18,7 @@ export class UsersService {
         private readonly tokenService: TokensService,
     ) { }
 
-    async createOne(user: CreateUserDto, req: any, res: any) {
+    async createOne(user: CreateUserDto, req: any, res: Response) {
         if (!user) {
             throw new BadRequestException('Missing required user fields')
         }
@@ -71,6 +72,7 @@ export class UsersService {
             middleName: user.middleName,
             lastName: user.lastName,
             gender: user.gender,
+            username: user.username,
             dob,
             email,
             emailVerified: false,
@@ -106,6 +108,31 @@ export class UsersService {
             }
         } catch (e) {
             throw new InternalServerErrorException('Something went wrong')
+        }
+    }
+
+    async forgotPassword(user: LoginSanitizeDto) {
+        if (!user) {
+            throw new BadRequestException('Correct user fields not passed.')
+        }
+
+        const encryptedEmail = this.encryptionService.encrypt(user.email)
+
+        if (!encryptedEmail) {
+            throw new InternalServerErrorException('Could not encrypt email')
+        }
+
+        let userData;
+        try {
+            userData = await User.findOne({ email: encryptedEmail })
+        } catch (e) {
+            throw new InternalServerErrorException('Could not find user')
+        }
+
+        if (!userData) { throw new NotFoundException('User not found.') }
+
+        return {
+            data: userData
         }
     }
 }

@@ -21,4 +21,7 @@ const SessionSchema = new Schema<PulseSession>({
     isActive: { type: Boolean, default: true },
 })
 
+SessionSchema.index({ sessionId: 1 })
+SessionSchema.index({ ip: 1 })
+
 export default mongoose.model<PulseSession>("sessions", SessionSchema);

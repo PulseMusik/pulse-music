@@ -3,15 +3,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { OauthModule } from './users/oauth/oauth.module';
-import { EmailModule } from './email/email.module';
 
 import { minutes, ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler'
 import { APP_GUARD } from '@nestjs/core';
+import { ArtistsController } from './artists/artists.controller';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
     UsersModule,
-    EmailModule,
     ThrottlerModule.forRoot({
       throttlers: [
         {
@@ -21,9 +21,10 @@ import { APP_GUARD } from '@nestjs/core';
         },
       ],
       errorMessage: 'Too many requests'
-    })
+    }),
+    ChatModule
   ],
-  controllers: [AppController],
+  controllers: [AppController, ArtistsController],
   providers: [AppService, {
     provide: APP_GUARD,
     useClass: ThrottlerGuard

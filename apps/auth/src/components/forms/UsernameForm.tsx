@@ -1,30 +1,44 @@
 'use client'
 
 import Wrapper from '@/components/wrapper'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useForm } from 'react-hook-form';
 import { useSignup } from '@/app/handlers/context/SignupContext';
 import { useRouter } from 'next/navigation';
 
-const BirthdayForm = () => {
+import { submitSignupToServer } from '@/app/handlers/form';
+
+const UsernameForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
 
     const { setSignupData, signupData } = useSignup()
 
     const router = useRouter()
 
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
+    const [errorMessage, setErrorMessage] = useState('')
+
     const onSubmit = (data: any) => {
+        setErrorMessage('')
+
         setSignupData(prev => ({
             ...prev,
-            username: data.username
+            username: data.username,
+            email: data.email
         }));
-        router.push('/v1/onboarding/password')
-    }
 
-    useEffect(() => {
-        console.log(signupData)
-    }, [signupData])
+        const { confirmPassword, ...cleanedSignupData } = {
+            ...signupData,
+            username: data.username,
+            email: data.email,
+        };
+
+
+        setIsSubmitting(true)
+        try { submitSignupToServer(cleanedSignupData as any, setErrorMessage as any) } catch (e) { console.error(e) } finally { setIsSubmitting(false) }
+    }
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -69,8 +83,18 @@ const BirthdayForm = () => {
                         )}
                     </div>
 
+                    {errorMessage && (
+                        <p className='text-red-500 text-sm pl-1 mt-4 text-center'>{errorMessage}</p>
+                    )}
+
                     <div className='flex w-full justify-center'>
-                        <button className=' bg-blue-400 cursor-pointer rounded text-white hover:shadow-sm flex justify-center items-center leading-7.5 h-7.5 p-5 mt-3 w-full'>Next</button>
+                        <button className=' bg-blue-400 cursor-pointer rounded text-white hover:shadow-sm flex justify-center items-center leading-7.5 h-7.5 p-5 mt-3 w-full'>
+                            {!isSubmitting ? (
+                                <p>Next</p>
+                            ) : (
+                                <img className='invert_color' src="/spinners/180-ring.svg" />
+                            )}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -78,4 +102,4 @@ const BirthdayForm = () => {
     )
 }
 
-export default BirthdayForm
+export default UsernameForm

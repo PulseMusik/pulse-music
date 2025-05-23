@@ -1,17 +1,17 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface PictureEntry {
+export interface PictureEntry {
     url: string;
     uploadedAt?: Date;
 }
 
-interface FriendPreferences {
+export interface FriendPreferences {
     showActivity: boolean;
     showProfilePicture: boolean;
     nickname?: string;
 }
 
-interface Friend {
+export interface Friend {
     id: string;
     addedAt?: Date;
     preferences: FriendPreferences;
@@ -243,6 +243,10 @@ const PulseAccountSchema: Schema = new Schema<PulseAccountDocument>({
         }
     }
 }, { timestamps: true });
+
+PulseAccountSchema.index({ email: 1 })
+PulseAccountSchema.index({ firstName: 1, lastName: 1 })
+PulseAccountSchema.index({ phoneNumber: 1 })
 
 export default mongoose.model<PulseAccountDocument>("accounts", PulseAccountSchema);
 

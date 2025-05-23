@@ -6,12 +6,16 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useSignup } from '@/app/handlers/context/SignupContext';
 
+import { useRouter } from 'next/navigation';
+
 const BirthdayForm = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm()
 
     const { setSignupData, signupData } = useSignup()
 
     const [showPassword, setShowPassword] = useState(false)
+
+    const router = useRouter()
 
     const onSubmit = (data: any) => {
         if (data.password !== data.confirmPassword) {
@@ -24,11 +28,9 @@ const BirthdayForm = () => {
             password: data.password,
             confirmPassword: data.password,
         }));
-    }
 
-    useEffect(() => {
-        console.log(signupData)
-    }, [signupData])
+        router.push('/v1/onboarding/username')
+    }
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 

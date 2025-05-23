@@ -27,10 +27,6 @@ const BirthdayForm = () => {
         router.push('/v1/onboarding/password')
     }
 
-    useEffect(() => {
-        console.log(signupData)
-    }, [signupData])
-
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
     return (

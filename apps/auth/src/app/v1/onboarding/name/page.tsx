@@ -3,9 +3,10 @@ import React from 'react'
 
 import NameForm from '@/components/forms/NameForm'
 import { Metadata } from 'next'
+import { COMPANY_NICKNAME } from '@pulse/lib/constants'
 
 export const metadata: Metadata = {
-    title: 'Create your Pulse account'
+    title: `Create your ${COMPANY_NICKNAME} account`
 }
 
 const page = () => {
